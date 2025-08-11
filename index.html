@@ -1,0 +1,130 @@
+ <!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Login Demo</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: #333;
+        }
+        #loginContainer {
+            background: white;
+            padding: 40px 60px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            width: 380px;
+            text-align: center;
+        }
+        #loginContainer img {
+            width: 80px;
+            margin-bottom: 20px;
+        }
+        #loginContainer h1 {
+            margin-bottom: 25px;
+            font-weight: 700;
+            color: #2575fc;
+            font-family: cursive;
+        }
+        input[type=text], input[type=password] {
+            width: 100%;
+            padding: 14px;
+            margin: 10px 0 20px 0;
+            border: 1.5px solid #2575fc;
+            border-radius: 6px;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+        input[type=text]:focus, input[type=password]:focus {
+            border-color: #6a11cb;
+            outline: none;
+        }
+        input[type=submit] {
+            width: 100%;
+            padding: 14px;
+            background-color: #2575fc;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+        input[type=submit]:hover {
+            background-color: #6a11cb;
+        }
+        .error {
+            color: #d93025;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        #successMessage {
+            display: none;
+            background: white;
+            padding: 40px 60px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            width: 380px;
+            text-align: center;
+            font-size: 22px;
+            font-weight: 700;
+            color: #2575fc;
+        }
+    </style>
+</head>
+<body>
+
+<div id="loginContainer">
+    <!-- Placeholder company logo -->
+    <img src="logo.png" alt="Company Logo" />
+    <h1>Next Trip</h1>
+    
+    <div class="error" id="errorMsg"></div>
+    
+    <form onsubmit="return handleLogin(event)">
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <input type="submit" value="Login">
+    </form>
+</div>
+
+<div id="successMessage">
+    <h2>Login Successful!</h2>
+    <p>Welcome, <span id="userDisplay"></span>!</p>
+</div>
+
+<script>
+    const validUsers = {
+        user1: 'pass1',
+        user2: 'pass2',
+        admin: 'admin123'
+    };
+
+    function handleLogin(event) {
+        event.preventDefault();
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value;
+
+        if (validUsers[username] && validUsers[username] === password) {
+            document.getElementById('loginContainer').style.display = 'none';
+            document.getElementById('userDisplay').textContent = username;
+            document.getElementById('successMessage').style.display = 'block';
+            document.getElementById('errorMsg').textContent = '';
+        } else {
+            document.getElementById('errorMsg').textContent = 'Invalid username or password.';
+        }
+        return false;
+    }
+</script>
+
+</body>
+</html>
+
+
